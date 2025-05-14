@@ -6,6 +6,13 @@ from .serializers import PatientSerializer, DoctorSerializer, AppointmentSeriali
 from django.views.generic.edit import CreateView
 from .forms import AppointmentForm, PatientForm
 
+from django.http import HttpResponse
+
+
+def home(request):
+    return HttpResponse("<h1>Welcome to the Clinic Appointment System</h1><p><a href='/api/make/'>Go to Make Appointment</a></p>")
+    
+
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
