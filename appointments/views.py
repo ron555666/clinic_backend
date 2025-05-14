@@ -7,10 +7,11 @@ from django.views.generic.edit import CreateView
 from .forms import AppointmentForm, PatientForm
 
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
-    return HttpResponse("<h1>Welcome to the Clinic Appointment System</h1><p><a href='/api/make/'>Go to Make Appointment</a></p>")
+    return render(request, 'appointments/home.html')
     
 
 class PatientViewSet(viewsets.ModelViewSet):

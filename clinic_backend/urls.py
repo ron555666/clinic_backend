@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from appointments.views import PatientCreateView  
+from appointments.views import home, PatientCreateView  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
