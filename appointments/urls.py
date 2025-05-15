@@ -1,13 +1,13 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
 from .views import (
     home,
+    appointment_create_html,
+    patient_create_html,
     PatientViewSet,
     DoctorViewSet,
     AppointmentViewSet,
-    AppointmentCreateView,
-    PatientCreateView,  # ✅ 一定要导入
 )
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'patients', PatientViewSet)
@@ -15,8 +15,8 @@ router.register(r'doctors', DoctorViewSet)
 router.register(r'appointments', AppointmentViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
     path('', home, name='home'),
-    
-    path('make/', AppointmentCreateView.as_view(), name='make_appointment'),
+    path('api/', include(router.urls)),
+    path('make/', appointment_create_html, name='make_appointment_page'),
+    path('patients/create/', patient_create_html, name='create_patient')
 ]
