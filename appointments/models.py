@@ -21,9 +21,16 @@ class Appointment(models.Model):
     appointment_date = models.DateField()
     appointment_time = models.TimeField()
     created_at = models.DateTimeField(auto_now_add=True)
-
     reason = models.TextField(blank=True, null=True)
-    
 
     def __str__(self):
         return f"{self.patient.name} with {self.doctor.name} on {self.appointment_date}"
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["doctor", "appointment_date", "appointment_time"],
+                name="uniq_doctor_date_time"
+            )
+        ]
+        ordering = ["appointment_date", "appointment_time", "doctor_id"]
